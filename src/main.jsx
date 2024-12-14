@@ -1,4 +1,4 @@
-// import { StrictMode } from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
@@ -7,10 +7,14 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContextProvider } from "./context/AuthContext.jsx";
 import { HelmetProvider } from 'react-helmet-async';
+import {QueryClient,QueryClientProvider,} from '@tanstack/react-query';
+
+const queryClient = new QueryClient()
 
 createRoot(document.getElementById("root")).render(
-  // <StrictMode>
+  <StrictMode>
   <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <AuthContextProvider>
         <ToastContainer
@@ -23,6 +27,7 @@ createRoot(document.getElementById("root")).render(
         <App />
       </AuthContextProvider>
     </BrowserRouter>
+    </QueryClientProvider>
     </HelmetProvider>
-  // </StrictMode>
+  </StrictMode>
 );

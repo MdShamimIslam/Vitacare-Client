@@ -39,7 +39,7 @@ const Tabs = ({ tab, setTab }) => {
 
   return (
     <div
-      className=" md:w-[500px] lg:w-[400px] mx-auto lg:flex flex-col 
+      className=" md:w-[400px] mb-6 lg:w-[400px] mx-auto lg:flex flex-col 
       p-[30px] bg-white shadow-panelShadow lg:ml-[-80px]
       items-center h-max rounded-md"
     >

@@ -38,7 +38,8 @@ const MyBookings = () => {
       {error && !loading && <Error errorMessage={error} />}
 
       {!loading && !error && data?.data?.length > 0 && (
-        <div className="overflow-x-auto  border border-gray-200 rounded-lg">
+        <div className="overflow-x-auto  border border-gray-200 
+        rounded-lg">
           <table className="w-full text-left text-sm text-gray-700">
             <thead className="text-xs text-white uppercase bg-primaryColor ">
               <tr>
