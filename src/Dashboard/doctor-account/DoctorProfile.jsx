@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import uplaodImageCloudinary from "../../utils/uploadCloudinary";
 import { toast } from "react-toastify";
-import { BASE_URL, token } from "../../config";
+import { BASE_URL } from "../../config";
+import HashLoader from "react-spinners/HashLoader";
 
 const DoctorProfile = ({ handleProfileUpdate, doctorData }) => {
   const [formData, setFormData] = useState({
@@ -20,6 +21,8 @@ const DoctorProfile = ({ handleProfileUpdate, doctorData }) => {
     about: "",
     photo: null,
   });
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadLabel, setUploadLabel] = useState("Upload Photo");
 
   useEffect(() => {
     setFormData({
@@ -45,9 +48,22 @@ const DoctorProfile = ({ handleProfileUpdate, doctorData }) => {
   // upload image files func
   const handeFileInputChange = async (e) => {
     const file = e.target.files[0];
-    const data = await uplaodImageCloudinary(file);
+    if (!file) return;
 
-    setFormData({ ...formData, photo: data?.url });
+    setIsUploading(true);
+    setUploadLabel("Uploading...");
+
+    try {
+      const data = await uplaodImageCloudinary(file);
+      setFormData({ ...formData, photo: data?.url });
+      setUploadLabel("Uploaded Image");
+    } catch (error) {
+      toast.error("Image upload failed.");
+      setUploadLabel("Upload Photo");
+    } finally {
+      setIsUploading(false);
+    }
+
   };
 
   // update profile handler
@@ -55,6 +71,7 @@ const DoctorProfile = ({ handleProfileUpdate, doctorData }) => {
     e.preventDefault();
 
     try {
+      const token = localStorage.getItem("token");
       const res = await fetch(`${BASE_URL}/doctors/${doctorData._id}`, {
         method: "PUT",
         headers: {
@@ -74,7 +91,7 @@ const DoctorProfile = ({ handleProfileUpdate, doctorData }) => {
       toast.error(err.message);
     }
   };
-
+  
   //   reusable function for adding item
   const addItem = (key, item) => {
     setFormData((prevFormData) => ({
@@ -540,7 +557,7 @@ const DoctorProfile = ({ handleProfileUpdate, doctorData }) => {
                       bg-[#0066ff46] text-headingColor font-semibold rounded-lg
                        truncate cursor-pointer"
             >
-              Uplaod Photo
+               {uploadLabel}
             </label>
           </div>
         </div>
@@ -548,10 +565,13 @@ const DoctorProfile = ({ handleProfileUpdate, doctorData }) => {
           <button
             type="submit"
             onClick={updateProfileHandler}
-            className="bg-primaryColor py-3 px-4 leading-[30px] w-full
-             text-white text-[18px] cursor-pointer rounded-lg"
+            disabled={isUploading}
+            className={`w-full bg-primaryColor text-white 
+             text-[18px] leading-[30px] rounded-lg px-4 py-3 ${
+              (isUploading) && "opacity-50 cursor-not-allowed"
+            }`}
           >
-            Update Profile
+            {isUploading ? <HashLoader size={25} color="#ffffff" /> : "Update Profile"}
           </button>
         </div>
       </form>

@@ -21,15 +21,9 @@ const AboutUs = () => {
         <title>VitaCare | About Us</title>
       </Helmet>
       <div>
-        <div data-aos="zoom-in-down" className="text-center">
-          <h4 className="md:text-xl text-primaryColor">Welcome To VitaCare</h4>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mt-5">
-            Dedicated to Providing Quality Care <br />
-            
-          </h2>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold md:mt-2">
-            for Every Patient
-          </h2>
+        <div data-aos="zoom-in-down" className="text-center md:w-[600px] lg:w-[800px] mx-auto">
+          <h4 className="md:text-2xl text-xl font-semibold text-primaryColor">Welcome To VitaCare</h4>
+          <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold mt-5">Dedicated to Providing Quality Care for Every Patient</h2>
         </div>
         <div className="lg:flex md:gap-5 lg:gap-20 mt-8 md:mt-16 lg:mt-24">
           <img
@@ -46,7 +40,7 @@ const AboutUs = () => {
             data-aos-easing="ease-in-sine"
             className="text-justify"
           >
-            <h3 className=" text-lg md:text-3xl font-semibold">
+            <h3 className=" text-lg md:text-2xl font-semibold">
               We Always Ensure Best Medical Treatment For Your Health
             </h3>
             <p className="text-textColor mt-6">

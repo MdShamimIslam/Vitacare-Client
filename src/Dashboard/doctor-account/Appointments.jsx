@@ -1,7 +1,11 @@
 import { formateDate } from "../../utils/formateDate";
 
 const Appointments = ({ appointments }) => {
-  console.log(appointments);
+
+  const handlePatientApproved = (patientId) => {
+console.log(patientId);
+  }
+
   return (
     <table className="lg:w-[880px] text-left text-sm text-gray-500">
       <thead className="text-xs text-gray-700 uppercase bg-gray-50">
@@ -20,6 +24,9 @@ const Appointments = ({ appointments }) => {
           </th>
           <th scope="col" className="px-6 py-3">
             Payment
+          </th>
+          <th scope="col" className="px-6 py-3">
+            Status
           </th>
           <th scope="col" className="px-6 py-3">
             Price
@@ -54,6 +61,20 @@ const Appointments = ({ appointments }) => {
                   <div className="h-2 w-2 rounded-full bg-red-500 mr-2"></div>
                   UnPaid
                 </div>
+              )}
+            </td>
+            <td className="px-6 py-4">
+              {item.status === "approved" ? (
+                <div className="flex items-center">
+                  <div className="h-2 w-2 rounded-full bg-green-500 mr-2"></div>
+                  Approved
+                </div>
+              ) : (
+                <button 
+                onClick={() => handlePatientApproved(item.user._id)} 
+                className="bg-slate-600 text-white py-1 px-3 rounded-3xl">
+                  {item.status}
+                </button>
               )}
             </td>
             <td className="px-6 py-4">${item.ticketPrice}</td>

@@ -8,6 +8,7 @@ import Loading from "../../components/Loading/Loading";
 import Error from "../../components/Error/Error";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import defaultUser from "/user.png"
 
 const MyAccount = () => {
   const { dispatch } = useAuth();
@@ -29,7 +30,6 @@ const MyAccount = () => {
   };
 
   const handleLogout = () => {
-    console.log("logout");
     dispatch({
       type: "LOGOUT",
     });
@@ -66,10 +66,12 @@ const MyAccount = () => {
 
         {!loading && !error && (
           <div className="grid md:grid-cols-3 lg:gap-10">
-            <div className="pb-[50px] py-4 px-[30px] rounded-md bg-[#f3f0f0a8] h-[400px] md:h-[450px]">
+            <div 
+            className="pb-[50px] py-4 px-[30px] rounded-md bg-[#f3f0f0a8]"
+            >
               <div className="flex items-center justify-center">
                 <img
-                  src={photo}
+                  src={photo || defaultUser}
                   alt=""
                   className="w-[100px] h-[100px] object-cover rounded-full border-2 border-solid
                  border-primaryColor"
@@ -91,7 +93,7 @@ const MyAccount = () => {
                   </p>
                 )}
               </div>
-              <div className="mt-[50px] md:mt-[100px]">
+              <div className="mt-[50px] md:mt-[70px]">
                 <button
                   onClick={handleLogout}
                   className="w-full rounded-md bg-[#181A1E] p-3 text-[16px]
@@ -108,7 +110,7 @@ const MyAccount = () => {
                 </button>
               </div>
             </div>
-            <div className="md:col-span-2 md:px-[30px] ">
+            <div className="md:col-span-2 md:px-[30px] max-w-full overflow-hidden">
               <div className="mb-6 mt-8 md:mt-0">
                 <button
                   onClick={() => setTab("bookings")}

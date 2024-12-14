@@ -36,10 +36,9 @@ const Home = () => {
         <div className="container">
           <div className="flex flex-col lg:flex-row gap-[90px] items-center justify-between ">
             {/* Hero Content start */}
-            {/* text-[36px] md:text-[40px] lg:text-[50px] */}
             <div>
               <div data-aos="fade-right" className="lg:w-[570px]">
-                <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold leading-[40px] md:leading-[60px] text-headingColor font-[800]  ">
+                <h1 className="text-2xl md:text-4xl lg:text-5xl leading-[40px] md:leading-[60px] text-headingColor font-[800]  ">
                   We help patients live a healthy, longer life.
                 </h1>
                 <p className="text__para">
@@ -51,12 +50,14 @@ const Home = () => {
                   quality healthcare, empowering your journey to well-being and
                   a healthier tomorrow.
                 </p>
+                <Link to="/doctors">
                 <button className="btn hover:bg-irisBlueColor">
                   Request an Appointment
                 </button>
+                </Link>
               </div>
               {/* Hero Counter */}
-              <div className="mt-[30px] lg:mt-[70px] flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-[30px] ">
+              <div className="mt-[30px] lg:mt-[70px] flex flex-col md:flex-row lg:items-center gap-5 md:gap-[60px] lg:gap-[30px] ">
                 <div>
                   <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-textColor">
                     20+
@@ -95,8 +96,8 @@ const Home = () => {
       </section>
       {/* Hero Section end */}
       <section>
-        <div className="container">
-          <div data-aos="fade-down" className="lg:w-[650px] mx-auto ">
+        <div className="container md:mt-10 mt-4">
+          <div data-aos="fade-down" className="lg:w-[650px] md:w-[600px] mx-auto ">
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-center">
             Providing the best medical care services
             </h2>
@@ -142,7 +143,7 @@ const Home = () => {
                   close to you.
                 </p>
                 <Link
-                  to="/doctors"
+                  to="/contact"
                   className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-purple-500 hover:border-none "
                 >
                   <BsArrowRight className="group-hover:text-white w-6 h-5" />
@@ -174,9 +175,9 @@ const Home = () => {
       </section>
       <About />
       {/* services section start */}
-      <section>
+      <section className="">
         <div data-aos="zoom-in-up" className="container">
-          <div className="xl:w-[500px] mx-auto">
+          <div className="lg:w-[550px] mx-auto">
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-center">Our Medical <span className="text-primaryColor">Services</span></h2>
             <p className="text__para text-center">
               Explore our wide range of medical services designed to meet your
@@ -215,7 +216,7 @@ const Home = () => {
                   online scheduling tool to select an appointment time.
                 </li>
               </ul>
-              <Link to="/">
+              <Link to="/about-us">
                 <button className="btn hover:bg-purpleColor">Learn More</button>
               </Link>
             </div>
@@ -261,7 +262,7 @@ const Home = () => {
       {/* Feature section end */}
       {/* Our great doctors start */}
       <section>
-        <div className="container">
+        <div className="container md:mt-4">
           <div data-aos="fade-down-left" className="xl:w-[470px] mx-auto">
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-center">Our Great <span className="text-primaryColor">Doctors</span></h2>
             <p className="text__para text-center">
@@ -277,17 +278,17 @@ const Home = () => {
       </section>
       {/* Our great doctors end */}
       {/* FAQ start */}
-      <section>
+      <section className="md:mt-6 lg:mt-0">
         <div className="container">
           <div className="flex justify-between gap-[50px] lg:gap-0">
-            <div className="w-1/2 hidden md:block">
+            <div className="w-1/2 hidden md:block lg:mt-0 md:mt-6">
               <img src={faqImg} alt="faq-image" />
             </div>
             <div
               data-aos="flip-left"
               data-aos-easing="ease-out-cubic"
               data-aos-duration="2000"
-              className="w-full md:w-1/2"
+              className="w-full md:w-1/2 lg:mt-6"
             >
               <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold">
                 Most questions by our beloved  <span className="text-primaryColor">patients</span>
@@ -304,7 +305,7 @@ const Home = () => {
           <div
             data-aos="fade-up"
             data-aos-anchor-placement="bottom-bottom"
-            className="xl:w-[500px] mx-auto"
+            className="md:w-[600px] mx-auto"
           >
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-center">What our patient <span className="text-primaryColor">say</span></h2>
             <p className="text__para text-center">

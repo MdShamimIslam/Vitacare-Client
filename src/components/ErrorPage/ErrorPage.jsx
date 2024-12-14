@@ -10,7 +10,7 @@ const ErrorPage = () => {
           Page Not Found
         </h1>
         <Link to="/home" className="flex justify-center">
-          <button className="btn">Go Home</button>
+          <button className="btn">Go Back to Home</button>
         </Link>
       </div>
     </div>

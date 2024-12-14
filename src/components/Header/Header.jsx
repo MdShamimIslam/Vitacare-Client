@@ -1,8 +1,11 @@
 import { NavLink, Link } from "react-router-dom";
 import { BiMenu } from "react-icons/bi";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/images/logoImg.png";
+import useFetchData from "../../hooks/useFetchData";
+import { BASE_URL } from "../../config";
+import defaultUser from "/user.png";
 
 const navLinks = [
   {
@@ -31,6 +34,9 @@ const Header = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const { user, role, token, logout } = useAuth();
+
+  const { data } = useFetchData(`${BASE_URL}/users/profile/me`);
+  const { data:doctorData } = useFetchData(`${BASE_URL}/doctors/profile/me`);
 
   const handleStickyHeader = () => {
     window.addEventListener("scroll", () => {
@@ -93,7 +99,7 @@ const Header = () => {
           <div className="flex items-center gap-4">
             {token && user ? (
               <div className="flex items-center gap-4">
-                 <button
+                <button
                   className=" hover:text-primaryColor text-textColor"
                   onClick={logout}
                 >
@@ -103,19 +109,20 @@ const Header = () => {
                   to={`${
                     role === "doctor"
                       ? "/doctors/profile/me"
-                      : "/users/profile/me"
+                      : role === "patient"
+                      ? "/users/profile/me"
+                      : "admin/profile/me"
                   }`}
                 >
-                  <figure className="w-[35px] h-[35px] rounded-full cursor-pointer ">
+                  <figure className="w-[35px] h-[35px] rounded-full cursor-pointer">
                     <img
                       title={user?.name}
                       className="w-full h-full object-cover rounded-full"
-                      src={user?.photo}
+                      src={data?.data?.photo || doctorData?.data?.photo || defaultUser}
                       alt="user-image"
                     />
                   </figure>
                 </Link>
-               
               </div>
             ) : (
               <Link

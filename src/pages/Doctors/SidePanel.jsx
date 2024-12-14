@@ -21,10 +21,9 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
       if (!res.ok) {
         throw new Error(data.message + "Please try again!!");
       }
-
-      if (data.session.url) {
-        window.location.href = data.session.url;
-      }
+      // if (data.session.url) {
+      //   window.location.href = data.session.url;
+      // }
     } catch (err) {
       toast.error(err.message);
     }

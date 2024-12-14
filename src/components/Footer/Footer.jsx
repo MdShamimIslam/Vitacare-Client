@@ -46,19 +46,26 @@ const quickLink02 = [
   },
 ];
 
-
 const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="pb-16 pt-10 bg-[#8accd71c]">
+    <footer className=" pb-16 pt-10 bg-[#8accd71c]">
       <div className="container">
-        <div className="flex justify-between flex-col md:flex-row flex-wrap gap-[30px]">
+        <div 
+        className="flex justify-between flex-col md:flex-row flex-wrap gap-[30px]"
+        >
           <div>
-          <Link to="/home" className="flex items-center" >
-            <img className="w-[60px] md:w-[70px] lg:w-[80px] ml-[-20px] md:ml-[-20px] lg:ml-[-20px] " src={logo} alt="logo" />
-            <h3 className="text-xl md:text-2xl ml-[-10px] lg:text-3xl font-bold">VitaCare</h3>
-          </Link>
+            <Link to="/home" className="flex items-center">
+              <img
+                className="w-[60px] md:w-[70px] lg:w-[80px] ml-[-20px] md:ml-[-20px] lg:ml-[-20px] "
+                src={logo}
+                alt="logo"
+              />
+              <h3 className="text-xl md:text-2xl ml-[-10px] lg:text-3xl font-bold">
+                VitaCare
+              </h3>
+            </Link>
 
             <p className="text-[16px] leading-7 font-[400] text-textColor mt-4 ">
               Copyright @ {year} developed by Md. Shamim Islam all right
@@ -66,16 +73,18 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-3 mt-4">
               {socialLinks.map((link, index) => (
-                <Link 
-                to={link.path}
-                key={index} 
-                className="w-9 h-9 border border-solid border-[#181A1E] rounded-full flex items-center justify-center group hover:bg-primaryColor hover:border-none">
+                <Link
+                  to={link.path}
+                  key={index}
+                  className="w-9 h-9 border border-solid border-[#181A1E] rounded-full flex items-center justify-center group hover:bg-primaryColor hover:border-none"
+                >
                   {link.icon}
                 </Link>
               ))}
             </div>
           </div>
-          <div>
+          <div className="flex justify-between lg:gap-80 md:gap-32 mt-6">
+            <div>
               <h2 className="text-[20px] leading-[30px] font-[700] mb-6 text-headingColor ">
                 Quick Links
               </h2>
@@ -92,9 +101,9 @@ const Footer = () => {
                 ))}
               </ul>
             </div>
-          <div>
+            <div>
               <h2 className="text-[20px] leading-[30px] font-[700] mb-6 text-headingColor ">
-              Support
+                Support
               </h2>
               <ul>
                 {quickLink02.map((item, index) => (
@@ -109,10 +118,11 @@ const Footer = () => {
                 ))}
               </ul>
             </div>
-            
+          </div>
         </div>
       </div>
     </footer>
+    
   );
 };
 

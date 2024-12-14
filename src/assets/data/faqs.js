@@ -10,12 +10,12 @@ export const faqs = [
       "You can easily book an appointment online by visiting our website, choosing your preferred doctor, and selecting an available time slot. Alternatively, you can call our clinic directly to schedule your visit.",
   },
   {
-    question: "Do I need a referral to see a specialist?",
+    question: "Need referral to see specialist?",
     content:
       "No, a referral is not required to see a specialist. You can book an appointment with any of our specialists directly, though it's always a good idea to consult your primary care provider first if you're unsure about your healthcare needs.",
   },
   {
-    question: "What should I bring to my appointment?",
+    question: "What to bring to appointment?",
     content:
       "Please bring your identification, insurance card (if applicable), and any relevant medical records or prescriptions. If you are seeing a specialist, it’s helpful to have a referral letter or medical history.",
   },

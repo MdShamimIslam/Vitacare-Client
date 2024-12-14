@@ -10,6 +10,8 @@ import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadLabel, setUploadLabel] = useState("Upload Photo");
   const [previewURL, setPreviewURL] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -52,12 +54,22 @@ const Register = () => {
 
   const handeFileInputChange = async (e) => {
     const file = e.target.files[0];
-
-    const data = await uplaodImageCloudinary(file);
-
-    setPreviewURL(data?.url);
-    setSelectedFile(data?.url);
-    setFormData({ ...formData, photo: data?.url });
+    if (!file) return;
+  
+    setIsUploading(true);
+    setUploadLabel("Uploading...");
+    try {
+      const data = await uplaodImageCloudinary(file);
+      setPreviewURL(data?.url);
+      setSelectedFile(data?.url);
+      setFormData({ ...formData, photo: data?.url });
+      setUploadLabel("Uploaded Image");
+    } catch (error) {
+      toast.error("Image upload failed.");
+      setUploadLabel("Upload Photo");
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const submitHandler = async (e) => {
@@ -215,14 +227,16 @@ const Register = () => {
                       bg-[#0066ff46] text-headingColor font-semibold rounded-lg
                        truncate cursor-pointer"
                   >
-                    Uplaod Photo
+                   {uploadLabel}
                   </label>
                 </div>
               </div>
               <div className="mt-7">
                 <button
-                  disabled={loading && true}
-                  className="w-full hover:bg-purple-500 bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3"
+                  disabled={loading || isUploading }
+                  className={`w-full hover:bg-purple-500 bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3 ${
+                    (loading || isUploading) && "opacity-50 cursor-not-allowed"
+                  }`}
                   type="submit"
                 >
                   {loading ? (

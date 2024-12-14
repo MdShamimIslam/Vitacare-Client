@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import uplaodImageCloudinary from "../../utils/uploadCloudinary";
-import { BASE_URL, token } from "../../config";
+import { BASE_URL } from "../../config";
 import { toast } from "react-toastify";
 import HashLoader from "react-spinners/HashLoader";
 
 const ProfileSettings = ({ handleProfileUpdate, user }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadLabel, setUploadLabel] = useState("Upload Photo");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -35,12 +37,22 @@ const ProfileSettings = ({ handleProfileUpdate, user }) => {
 
   const handeFileInputChange = async (e) => {
     const file = e.target.files[0];
-
-    const data = await uplaodImageCloudinary(file);
-
-    setFormData({ ...formData, photo: data?.url });
-
+    if (!file) return;
+  
+    setIsUploading(true);
+    setUploadLabel("Uploading...");
+    try {
+      const data = await uplaodImageCloudinary(file);
+      setFormData({ ...formData, photo: data?.url });
+      setUploadLabel("Uploaded Image");
+    } catch (error) {
+      toast.error("Image upload failed.");
+      setUploadLabel("Upload Photo");
+    } finally {
+      setIsUploading(false);
+    }
   };
+  
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -48,6 +60,7 @@ const ProfileSettings = ({ handleProfileUpdate, user }) => {
     setLoading(true);
 
     try {
+      const token = localStorage.getItem("token");
       const res = await fetch(`${BASE_URL}/users/${user._id}`, {
         method: "PUT",
         headers: {
@@ -66,6 +79,7 @@ const ProfileSettings = ({ handleProfileUpdate, user }) => {
 
       setLoading(false);
       toast.success(message);
+      window.location.reload();
       navigate("/users/profile/me");
     } catch (err) {
       toast.error(err.message);
@@ -165,15 +179,18 @@ const ProfileSettings = ({ handleProfileUpdate, user }) => {
                       bg-[#0066ff46] text-headingColor font-semibold rounded-lg
                        truncate cursor-pointer"
             >
-              Uplaod Photo
+           {uploadLabel}
             </label>
           </div>
         </div>
         <div className="mt-7">
           <button
-            disabled={loading && true}
-            className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3"
-            type="submit"
+             type="submit"
+             disabled={loading || isUploading}
+             className={`w-full bg-primaryColor text-white 
+              text-[18px] leading-[30px] rounded-lg px-4 py-3 ${
+               (loading || isUploading) && "opacity-50 cursor-not-allowed"
+             }`}
           >
             {loading ? <HashLoader size={25} color="#ffffff" /> : "Update Profile"}
           </button>
@@ -184,3 +201,4 @@ const ProfileSettings = ({ handleProfileUpdate, user }) => {
 };
 
 export default ProfileSettings;
+

@@ -17,13 +17,12 @@ const Contact = () => {
     e.preventDefault();
 
     emailjs
-      .sendForm("service_vu4iwek", "template_hvh3dcd", form.current, {
-        publicKey: "i-ATNt_8-qNQ_pwpy",
+      .sendForm(import.meta.env.VITE_SECRET_KEY, import.meta.env.VITE_TEMPLATE_KEY, form.current, {
+        publicKey: import.meta.env.VITE_PUBLIC_KEY,
       })
       .then(
         () => {
-          toast.success("Email sent successfully!");
-          // // reset the state
+          toast.success("Submitted successfully!");
           setEmail("");
           setSubject("");
           setMessage("");
@@ -44,7 +43,6 @@ const Contact = () => {
         <title>VitaCare | Contact</title>
       </Helmet>
       <FindALocation />
-      {/* className="px-4 mx-auto max-w-screen-md" */}
       <section>
         <div className="container mt-16 ">
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-center">
@@ -57,7 +55,8 @@ const Contact = () => {
 
           <div className=" lg:flex lg:gap-32">
             <div data-aos="fade-right">
-              <form className="space-y-8 lg:w-[700px] " ref={form} onSubmit={sendEmail}>
+              <form className="space-y-8 lg:w-[700px]" 
+              ref={form} onSubmit={sendEmail}>
                 <div>
                   <label htmlFor="email" className="form__label">
                     Email
@@ -92,8 +91,8 @@ const Contact = () => {
                   </label>
                   <textarea
                     type="text"
-                    rows="6"
                     id="message"
+                    rows="6"
                     placeholder="Leave a comment..."
                     className="form__input mt-1"
                     name="message"

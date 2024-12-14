@@ -12,7 +12,7 @@ import PrivateRoute from "./PrivateRoute";
 import CheckoutSuccess from "../pages/Doctors/CheckoutSuccess";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
-
+import AdminDashboard from "../Dashboard/admin-account/AdminDashboard";
 
 const Routers = () => {
   return (
@@ -20,7 +20,16 @@ const Routers = () => {
       <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
       <Route path="/doctors" element={<Doctors />} />
-      <Route path="/doctors/:id" element={<DoctorDetails />} />
+
+      <Route
+        path="/doctors/:id"
+        element={
+          <PrivateRoute allowedRoles={["doctor", "patient", "admin"]}>
+            <DoctorDetails />
+          </PrivateRoute>
+        }
+      />
+
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/contact" element={<Contact />} />
@@ -45,6 +54,16 @@ const Routers = () => {
           </PrivateRoute>
         }
       />
+      {/* admin account */}
+      <Route
+        path="/admin/profile/me"
+        element={
+          <PrivateRoute allowedRoles={["admin"]}>
+            <AdminDashboard/>
+          </PrivateRoute>
+        }
+      />
+
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );

@@ -18,17 +18,17 @@ const useFetchData = (url) => {
       setError(null);
       try {
         const res = await fetch(url, {
+          "Content-Type": "application/json",
           headers: { Authorization: `Bearer ${token}` },
         });
         const result = await res.json();
-        
+
         if (!res.ok) {
           throw new Error(result.message);
         }
 
         setData(result);
         setLoading(false);
-
       } catch (err) {
         setLoading(false);
         setError(err.message);
@@ -36,14 +36,13 @@ const useFetchData = (url) => {
     };
     // call fetchData function
     fetchData();
-
   }, [url]);
 
   return {
     data,
     loading,
-    error
-  }
+    error,
+  };
 };
 
 export default useFetchData;
