@@ -73,7 +73,7 @@ const Tabs = ({ tab, setTab }) => {
       >
         Profile
       </button>
-      <div className="mt-[100px] w-full">
+      <div className="mt-[50px] w-full">
         <button
           onClick={handleLogout}
           className="w-full rounded-md bg-[#181A1E] p-3 text-[16px]

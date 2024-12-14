@@ -6,6 +6,7 @@ import Error from "../../components/Error/Error";
 import AllUser from "./AllUser";
 import { useState } from "react";
 import AdminTab from "./AdminTab";
+import AllDoctor from "./AllDoctor";
 
 const AdminDashboard = () => {
   const { data, loading, error } = useFetchData(
@@ -40,8 +41,8 @@ const AdminDashboard = () => {
             }
             {
               tab === "allDoctors" && (
-                <div className="md:col-span-2 md:px-[30px]">
-                 Doctors
+                <div className="md:col-span-2 md:px-[30px] max-w-full overflow-hidden">
+                <AllDoctor/>
                 </div>
               )
             }

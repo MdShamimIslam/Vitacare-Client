@@ -1,4 +1,4 @@
-
+import { useEffect, useState } from "react";
 import Error from "../../components/Error/Error";
 import Loading from "../../components/Loading/Loading";
 import { BASE_URL } from "../../config";
@@ -7,7 +7,14 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 
 const AllUser = () => {
-  const { data, loading, error  } = useFetchData(`${BASE_URL}/users`);
+  const { data, loading, error } = useFetchData(`${BASE_URL}/users`);
+  const [patients, setPatients] = useState([]);
+
+  useEffect(() => {
+    if (data?.data) {
+      setPatients(data.data);
+    }
+  }, [data]);
 
   const handleDeletePatient = (_id) => {
     const token = localStorage.getItem("token");
@@ -21,7 +28,9 @@ const AllUser = () => {
       .then((data) => {
         if (data.success) {
           toast.success("Patient deleted successfully");
-            window.location.reload();
+          setPatients((prevPateints) =>
+            prevPateints.filter((patient) => patient._id !== _id)
+          );
         } else {
           toast.error("Failed to delete patient");
         }
@@ -31,12 +40,11 @@ const AllUser = () => {
       });
   };
 
-
   return (
     <div>
       {loading && !error && <Loading />}
       {error && !loading && <Error errorMessage={error} />}
-      {!loading && !error && data?.data?.length > 0 && (
+      {!loading && !error && patients?.length > 0 && (
         <div className="overflow-x-auto  border border-gray-200 rounded-lg">
           <table className="w-full text-left text-sm text-gray-700">
             <thead className="text-xs text-white uppercase bg-primaryColor">
@@ -59,14 +67,14 @@ const AllUser = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.data?.map(
+              {patients?.map(
                 ({ _id, photo, name, email, gender, bloodType }) => (
                   <tr key={_id} className="border-t hover:bg-gray-100">
                     <td className="px-6 py-4">
                       <img
                         className="w-12 md:h-10 lg:h-12 h-10 rounded-full border-2 border-gray-300"
                         src={photo}
-                        alt=""
+                        alt="user-image"
                       />
                     </td>
                     <td className="px-6 py-4">
