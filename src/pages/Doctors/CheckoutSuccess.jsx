@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const CheckoutSuccess = () => {
   return (
-    <div className="bg-gray-100 h-screen my-16">
+    <div className=" my-8 md:my-16">
       <div className="bg-white p-6 md:mx-auto">
         <svg className="w-[100px] mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
           <path

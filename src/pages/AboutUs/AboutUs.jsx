@@ -20,12 +20,7 @@ const AboutUs = () => {
       <Helmet>
         <title>VitaCare | About Us</title>
       </Helmet>
-      <div>
-        <div data-aos="zoom-in-down" className="text-center md:w-[600px] lg:w-[800px] mx-auto">
-          <h4 className="md:text-2xl text-xl font-semibold text-primaryColor">Welcome To VitaCare</h4>
-          <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold mt-5">Dedicated to Providing Quality Care for Every Patient</h2>
-        </div>
-        <div className="lg:flex md:gap-5 lg:gap-20 mt-8 md:mt-16 lg:mt-24">
+        <div className="lg:flex md:gap-5 lg:gap-20 ">
           <img
             data-aos="fade-right"
             data-aos-offset="300"
@@ -38,9 +33,9 @@ const AboutUs = () => {
             data-aos="fade-left"
             data-aos-offset="300"
             data-aos-easing="ease-in-sine"
-            className="text-justify"
+            // className="text-justify"
           >
-            <h3 className=" text-lg md:text-2xl font-semibold">
+            <h3 className=" text-lg md:text-3xl lg:text-4xl font-semibold md:font-bold">
               We Always Ensure Best Medical Treatment For Your Health
             </h3>
             <p className="text-textColor mt-6">
@@ -73,7 +68,7 @@ const AboutUs = () => {
             </button>
           </div>
         </div>
-      </div>
+    
 
       <div className="flex gap-36 mt-10 md:mt-16 lg:mt-32">
         <div data-aos="fade-right"

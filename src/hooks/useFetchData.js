@@ -16,11 +16,21 @@ const useFetchData = (url) => {
     const fetchData = async () => {
       setLoading(true);
       setError(null);
+      
       try {
         const res = await fetch(url, {
-          "Content-Type": "application/json",
-          headers: { Authorization: `Bearer ${token}` },
+          method: "GET", 
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
         });
+
+        if (res.status === 401) {
+          setError("Unauthorized access. Please log in again.");
+          return;
+        }
+
         const result = await res.json();
 
         if (!res.ok) {
@@ -31,7 +41,7 @@ const useFetchData = (url) => {
         setLoading(false);
       } catch (err) {
         setLoading(false);
-        setError(err.message);
+        setError(err.message || "An error occurred");
       }
     };
     // call fetchData function

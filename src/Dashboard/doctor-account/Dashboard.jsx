@@ -10,6 +10,7 @@ import DoctorAbout from "../../pages/Doctors/DoctorAbout";
 import DoctorProfile from "./DoctorProfile";
 import Appointments from "./Appointments";
 import { Helmet } from "react-helmet-async";
+import defaultImg from "/user.png";
 
 const Dashboard = () => {
   const [tab, setTab] = useState("overview");
@@ -65,8 +66,8 @@ const Dashboard = () => {
                   <div>
                     <div className="flex items-center gap-4 mb-10">
                       <img
-                        src={photo}
-                        alt=""
+                        src={photo || defaultImg}
+                        alt="user-image"
                         className="w-[200px] rounded h-[220px] lg:h-[220px]
                          md:h-[165px] object-cover"
                       />

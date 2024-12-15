@@ -35,7 +35,11 @@ const Routers = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/about-us" element={<AboutUs />} />
       <Route path="/services" element={<Services />} />
-      <Route path="/checkout-success" element={<CheckoutSuccess />} />
+      <Route path="/checkout-success" element={
+        <PrivateRoute allowedRoles={["patient"]}>
+        <CheckoutSuccess />
+        </PrivateRoute>
+        } />
       {/* user account */}
       <Route
         path="/users/profile/me"

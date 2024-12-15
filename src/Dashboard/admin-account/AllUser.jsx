@@ -12,7 +12,10 @@ const AllUser = () => {
 
   useEffect(() => {
     if (data?.data) {
-      setPatients(data.data);
+      const filteredPatients = data.data.filter(
+        (patient) => patient.role !== "admin"
+      );
+      setPatients(filteredPatients);
     }
   }, [data]);
 
@@ -95,6 +98,11 @@ const AllUser = () => {
             </tbody>
           </table>
         </div>
+      )}
+      {!loading && !error && patients?.length === 0 && (
+        <h2 className="mt-5 text-center leading-7 text-[20px] font-semibold text-primaryColor">
+          No patient added yet!
+        </h2>
       )}
     </div>
   );

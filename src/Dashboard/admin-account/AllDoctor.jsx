@@ -138,6 +138,11 @@ const AllDoctor = () => {
           </table>
         </div>
       )}
+      {!loading && !error && doctors?.length === 0 && (
+        <h2 className="mt-5 text-center leading-7 text-[20px] font-semibold text-primaryColor">
+         No doctor added yet!
+        </h2>
+      )}
     </div>
   );
 };

@@ -44,7 +44,7 @@ const Contact = () => {
       </Helmet>
       <FindALocation />
       <section>
-        <div className="container mt-16 ">
+        <div className="container mt-10 md:mt-16 ">
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-center">
             Contact <span className="text-primaryColor">Us</span>
           </h2>

@@ -11,7 +11,7 @@ function FindALocation() {
   }, []);
 
   return (
-    <div className="container lg:flex gap-28 mt-20">
+    <div className="container lg:flex gap-28 mt-12 md:mt-20">
       <div data-aos="fade-right"
      data-aos-offset="300"
      data-aos-easing="ease-in-sine" >

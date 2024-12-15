@@ -87,6 +87,7 @@ const DoctorProfile = ({ handleProfileUpdate, doctorData }) => {
       }
       handleProfileUpdate(result.data);
       toast.success(result.message);
+      window.location.reload();
     } catch (err) {
       toast.error(err.message);
     }

@@ -234,7 +234,7 @@ const Register = () => {
               <div className="mt-7">
                 <button
                   disabled={loading || isUploading }
-                  className={`w-full hover:bg-purple-500 bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3 ${
+                  className={`w-full  bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3 ${
                     (loading || isUploading) && "opacity-50 cursor-not-allowed"
                   }`}
                   type="submit"

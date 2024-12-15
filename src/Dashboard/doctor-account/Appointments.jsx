@@ -125,7 +125,7 @@ const Appointments = ({ appointments: initialAppointments }) => {
           </div>
         </div>
       ) : (
-        "No Appointments Available"
+        <p className="text-2xl font-semibold">No Appointments Available</p>
       )}
     </>
   );

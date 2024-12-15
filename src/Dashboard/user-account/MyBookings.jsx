@@ -4,11 +4,19 @@ import Loading from "../../components/Loading/Loading";
 import Error from "../../components/Error/Error";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 
 const MyBookings = () => {
   const { data, loading, error } = useFetchData(
     `${BASE_URL}/users/appointments/my-appointments`
   );
+   const [bookings, setBookings] = useState([]);
+
+    useEffect(() => { 
+       if (data?.data) {
+        setBookings(data.data);
+       }
+     }, [data]); 
 
   const handleDeleteBooking = (_id) => {
     const token = localStorage.getItem("token");
@@ -22,7 +30,10 @@ const MyBookings = () => {
       .then((data) => {
         if (data.success) {
           toast.success("Booking deleted successfully");
-          window.location.reload();
+          setBookings((prevBookings) =>
+            prevBookings.filter((item) => item._id !== _id)
+          );
+         
         } else {
           toast.error("Failed to delete booking");
         }
@@ -37,7 +48,7 @@ const MyBookings = () => {
       {loading && !error && <Loading />}
       {error && !loading && <Error errorMessage={error} />}
 
-      {!loading && !error && data?.data?.length > 0 && (
+      {!loading && !error && bookings?.length > 0 && (
         <div className="overflow-x-auto  border border-gray-200 
         rounded-lg">
           <table className="w-full text-left text-sm text-gray-700">
@@ -64,7 +75,7 @@ const MyBookings = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.data?.map((item) => {
+              {bookings?.map((item) => {
                 const { _id, doctor } = item;
                 const {
                   photo,
@@ -105,7 +116,7 @@ const MyBookings = () => {
           </table>
         </div>
       )}
-      {!loading && !error && data?.data?.length === 0 && (
+      {!loading && !error && bookings?.length === 0 && (
         <h2 className="mt-5 text-center leading-7 text-[20px] font-semibold text-primaryColor">
           You did not book any doctor yet!
         </h2>

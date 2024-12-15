@@ -1,36 +1,14 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import { BiMenu } from "react-icons/bi";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/images/logoImg.png";
 import useFetchData from "../../hooks/useFetchData";
 import { BASE_URL } from "../../config";
 import defaultUser from "/user.png";
 
-const navLinks = [
-  {
-    path: "/home",
-    display: "Home",
-  },
-  {
-    path: "/doctors",
-    display: "Find a Doctor",
-  },
-  {
-    path: "/services",
-    display: "Services",
-  },
-  {
-    path: "/about-us",
-    display: "About Us",
-  },
-  {
-    path: "/contact",
-    display: "Contact",
-  },
-];
-
 const Header = () => {
+  const location = useLocation();
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const { user, role, token, logout } = useAuth();
@@ -60,6 +38,42 @@ const Header = () => {
 
   const toggleMenu = () => menuRef.current.classList.toggle("show__menu");
 
+  const navLinks = [
+    {
+      path: "/home",
+      display: "Home",
+    },
+    {
+      path: "/doctors",
+      display: "Find a Doctor",
+      shouldNotActive: location.pathname.includes('/doctors/profile') || location.pathname.includes('/doctors/')
+
+    },
+    {
+      path: "/services",
+      display: "Services",
+    },
+    {
+      path: "/about-us",
+      display: "About Us",
+    },
+    {
+      path: "/contact",
+      display: "Contact",
+    },
+    {
+      path: `${
+        role === "doctor"
+          ? "/doctors/profile/me"
+          : role === "patient"
+          ? "/users/profile/me"
+          : "admin/profile/me"
+      }`,
+      display: "Dashboard",
+    },
+  ];
+
+
   return (
     <header className="header flex items-center" ref={headerRef}>
       {/* container */}
@@ -78,16 +92,17 @@ const Header = () => {
           </Link>
           {/* menu */}
           <div className="navigation" ref={menuRef} onClick={toggleMenu}>
-            <ul className="menu flex items-center gap-[2.7rem]">
+          <ul className="menu flex items-center gap-[2.7rem]">
               {navLinks.map((link, index) => (
                 <li key={index}>
                   <NavLink
                     to={link.path}
-                    className={(navClass) =>
-                      navClass.isActive
+                    className={(navClass) => {
+                      const isActive = navClass.isActive && !link.shouldNotActive;
+                      return isActive
                         ? "text-primaryColor text-[16px] leading-7 font-[600]"
-                        : "text-textColor text-[16px] leading-7 font-[500] hover:text-primaryColor "
-                    }
+                        : "text-textColor text-[16px] leading-7 font-[500] hover:text-primaryColor";
+                    }}
                   >
                     {link.display}
                   </NavLink>
@@ -118,7 +133,7 @@ const Header = () => {
                     <img
                       title={user?.name}
                       className="w-full h-full object-cover rounded-full"
-                      src={data?.data?.photo || doctorData?.data?.photo || defaultUser}
+                      src={data?.data?.photo || user?.photo || doctorData?.data?.photo || defaultUser}
                       alt="user-image"
                     />
                   </figure>
@@ -140,6 +155,7 @@ const Header = () => {
         </div>
       </div>
     </header>
+   
   );
 };
 
