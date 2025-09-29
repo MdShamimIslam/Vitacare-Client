@@ -97,9 +97,9 @@ const AllDoctor = () => {
               {doctors?.map(
                 ({ _id, photo, name, email, gender, specialization,isApproved }) => (
                   <tr key={_id} className="border-t hover:bg-gray-100">
-                    <td className="px-6 py-4">
+                    <td className="px-3 py-4">
                       <img
-                        className="w-12 md:h-10 lg:h-12 h-10 rounded-full border-2 border-gray-300"
+                        className="w-12 h-10 md:h-10 lg:h-12  rounded-full border-2 border-gray-300"
                         src={photo}
                         alt="doctor-image"
                       />

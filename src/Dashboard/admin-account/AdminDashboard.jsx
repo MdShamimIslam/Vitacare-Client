@@ -26,8 +26,7 @@ const AdminDashboard = () => {
         {error && !loading && <Error errorMessage={error} />}
 
         {!loading && !error && data?.success && (
-          <div 
-          // className="grid md:grid-cols-3 lg:gap-10"
+          <div
           className="grid md:grid-cols-3 gap-24 lg:gap-10"
 
           >
@@ -41,7 +40,7 @@ const AdminDashboard = () => {
             }
             {
               tab === "allDoctors" && (
-                <div className="md:col-span-2 md:px-[30px] max-w-full overflow-hidden">
+                <div className="md:col-span-2 mt-[-50px] md:mt-0 md:px-[30px] max-w-full overflow-hidden">
                 <AllDoctor/>
                 </div>
               )

@@ -61,16 +61,20 @@ const Header = () => {
       path: "/contact",
       display: "Contact",
     },
-    {
-      path: `${
-        role === "doctor"
-          ? "/doctors/profile/me"
-          : role === "patient"
-          ? "/users/profile/me"
-          : "admin/profile/me"
-      }`,
-      display: "Dashboard",
-    },
+    ...(token && user
+      ? [
+          {
+            path: `${
+              role === "doctor"
+                ? "/doctors/profile/me"
+                : role === "patient"
+                ? "/users/profile/me"
+                : "/admin/profile/me"
+            }`,
+            display: "Dashboard",
+          },
+        ]
+      : []),
   ];
 
 

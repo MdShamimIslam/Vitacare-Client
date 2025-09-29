@@ -111,7 +111,7 @@ const MyAccount = () => {
               </div>
             </div>
             <div className="md:col-span-2 md:px-[30px] max-w-full overflow-hidden">
-              <div className="mb-6 mt-8 md:mt-0">
+              <div className="mb-6 mt-16 md:mt-0">
                 <button
                   onClick={() => setTab("bookings")}
                   className={`${

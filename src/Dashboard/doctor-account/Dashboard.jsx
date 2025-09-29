@@ -110,7 +110,12 @@ const Dashboard = () => {
                   </div>
                 )}
                 {tab === "appointments" && (
-                  <Appointments appointments={data?.data?.appointments} />
+                   <div className="md:col-span-2
+                      md:px-[30px] max-w-full overflow-hidden">
+                   <Appointments
+                   appointments={data?.data?.appointments} />
+                 </div>
+                  
                 )}
                 {tab === "settings" && (
                   <DoctorProfile
